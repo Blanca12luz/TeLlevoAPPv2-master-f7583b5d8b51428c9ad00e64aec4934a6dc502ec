@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+      <ion-text color="danger">
+        El nombre debe tener al menos 3 caracteres.
+      </ion-text>
+    }
+
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+      <ion-text color="danger">
+        Introduce un correo válido.
+      </ion-text>
+    }
+    
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item>
+    @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+      <ion-text color="danger">
+        La contraseña debe tener al menos 6 caracteres.
+      </ion-text>
+    }
+
+    <ion-button expand="full" type="submit" [disabled]="registerForm.invalid">
+      Registrar
+    </ion-button>
+  </form>
+</ion-content>

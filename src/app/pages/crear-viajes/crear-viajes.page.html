@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver" mode="ios"
+        defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="viajecreado(viajeForm)" #viajeForm="ngForm">
+    <!-- Nombre del viaje -->
+    <ion-item>
+      <ion-label position="floating">Nombre del viaje</ion-label>
+      <ion-input [(ngModel)]="nombre" name="nombre" required></ion-input>
+    </ion-item>
+
+    <!-- Fecha del viaje -->
+    <ion-item>
+      <ion-label>Fecha del viaje</ion-label>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="datetime" presentation="date" locale="es-ES"
+      first-day-of-week="1" [(ngModel)]="fecha"
+      name="fecha" [ngModelOptions]="{ standalone: true }"
+      cancel-text="Cancelar" done-text="Seleccionar">
+    </ion-datetime>
+
+    <!-- Espacios disponibles -->
+    <ion-item>
+      <ion-label position="floating">Espacios disponibles</ion-label>
+      <ion-input type="number" [(ngModel)]="espacioDisponible"
+        name="espacioDisponible" required></ion-input>
+    </ion-item>
+
+    <!-- Precio -->
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="precio" name="precio"
+        required></ion-input>
+    </ion-item>
+
+    <!-- Buscador -->
+    <ion-item>
+      <ion-label position="stacked">Elegir Destino</ion-label>
+      <ion-input [(ngModel)]="searchQuery" name="searchQuery"
+        (ionInput)="searchLocation()"
+        placeholder="Ingresa una ubicación"></ion-input>
+    </ion-item>
+
+    <!-- Botones de acciones -->
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+      <!-- Botón para usar la ubicación actual -->
+      <ion-button expand="block" color="secondary" (click)="usarGPS()">
+        Usar mi ubicación
+      </ion-button>
+
+      <!-- Botón para trazar la ruta -->
+      <ion-button expand="block" color="tertiary" (click)="trazarRuta()">
+        Trazar Ruta
+      </ion-button>
+    </div>
+
+    <!-- Mapa -->
+    <div id="map"
+      style="width: 100%; height: 300px; margin-top: 10px; border: 1px solid #ccc;"></div>
+    <!-- Botón para crear el viaje -->
+    <ion-button expand="block" type="submit" color="primary"
+      [disabled]="viajeForm.invalid || loading">
+      Crear Viaje
+    </ion-button>
+  </form>
+</ion-content>

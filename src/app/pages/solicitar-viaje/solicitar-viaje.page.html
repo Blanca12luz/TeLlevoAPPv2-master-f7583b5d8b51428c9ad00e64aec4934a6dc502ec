@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver" mode="ios" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Solicitar Viaje</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let viaje of viajes">
+        <ion-label>
+          <h2>{{ viaje.nombre }}</h2>
+          <p>Fecha: {{ viaje.fecha }}</p>
+          <p>Espacios Disponibles: {{ viaje.espacioDisponible }}</p>
+          <p>Precio: ${{ viaje.precio }}</p>
+          <p>Destino: {{ viaje.destino.nombre }}</p>
+        </ion-label>
+        <ion-button slot="end" (click)="seleccionarViaje(viaje)" color="secondary">
+          Seleccionar
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  
+    <ion-footer *ngIf="viajes.length === 0">
+      <ion-text>No hay viajes disponibles.</ion-text>
+    </ion-footer>
+  </ion-content>
+</ion-content>

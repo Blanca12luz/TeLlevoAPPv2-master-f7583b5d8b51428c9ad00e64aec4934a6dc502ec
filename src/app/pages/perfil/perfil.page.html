@@ -1,0 +1,59 @@
+<!-- profile.page.html -->
+<ion-header>
+  <ion-toolbar mode="ios" color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver" mode="ios" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (loading) {
+    <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center">
+      <ion-spinner></ion-spinner>
+      <h1 style="margin-top: 10px">Cargando Perfil...</h1>
+    </div>
+  } @else {
+    <div class="profile-container">
+      <ion-card style="width: 100%;">
+        <ion-card-header>
+          <ion-card-title>Información del Perfil</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-text>{{ profile.nombre }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico</ion-label>
+            <ion-text>{{ profile.email }}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">¿Es conductor?</ion-label>
+            <ion-text>{{ profile.conductor ? "Sí" : "No" }}</ion-text>
+          </ion-item>
+          @if (profile.conductor) {
+            <ion-item>
+              <ion-label position="stacked">Vehículo</ion-label>
+              <ion-text>{{ profile.vehiculo }}</ion-text>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Patente</ion-label>
+              <ion-text>{{ profile.patente }}</ion-text>
+            </ion-item>
+          }
+        </ion-card-content>
+      </ion-card>
+      @if (!profile.conductor){
+        <ion-button expand="block" color="primary" (click)="convertirEnConductor()">
+          Convertirse en Conductor
+        </ion-button>  
+      } @else {
+        <ion-button expand="block" color="danger" (click)="dejarDeSerConductor()">
+          Dejar de ser Conductor
+        </ion-button>
+      }
+    </div>
+  }
+</ion-content>

@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar mode="ios" color="secondary">
+    <ion-title color="dark" mode="md" slot="start">DuocUC</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button routerLink="/perfil">
+        <ion-icon color="light" slot="start" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon color="light" slot="start" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text color="primary" class="ion-text-center">
+    <h1>TeLlevoAPP</h1>
+  </ion-text>
+  @if (loading) {
+  <div
+    style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center">
+    <ion-spinner></ion-spinner>
+    <h1 style="margin-top: 10px">Cargando...</h1>
+    <p>Espere un momento por favor...</p>
+  </div>
+  } @else {
+  <ion-text class="ion-text-center">
+    <h3>Bienvenido, {{ user.name }}</h3>
+  </ion-text>
+  @if (!user.conductor) {
+  <ion-list lines="full" inset="true">
+    <ion-list-header mode="ios" color="primary">
+      <ion-label color="light">Menú pasajero</ion-label>
+    </ion-list-header>
+
+    <ion-item detail="true" routerLink="{{item.ruta}}"
+      *ngFor="let item of vinculos">
+      <ion-label class="i-text-capitalize">{{item.titulo}}</ion-label>
+      <ion-icon name="{{item.icono}}" slot="start"></ion-icon>
+    </ion-item>
+  </ion-list>
+  } @else {
+  <ion-list lines="full" inset="true">
+    <ion-list-header mode="ios" color="primary">
+      <ion-label color="light">Menú Conductor</ion-label>
+    </ion-list-header>
+
+    <ion-item detail="true" routerLink="{{item.rutaconductor}}"
+      *ngFor="let item of vinculoConductor">
+      <ion-label class="i-text-capitalize">{{item.tituloconductor}}</ion-label>
+      <ion-icon name="{{item.iconoconductor}}" slot="start"></ion-icon>
+    </ion-item>
+  </ion-list>
+  }
+  }
+</ion-content>

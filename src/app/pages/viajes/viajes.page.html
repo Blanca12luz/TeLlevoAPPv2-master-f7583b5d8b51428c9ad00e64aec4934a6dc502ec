@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" >
+      <ion-back-button text="Volver" mode="ios" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title >viajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Mis Viaje Creados</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item *ngFor="let viaje of viajes">
+    <ion-label>
+      <h2>{{ viaje.nombre }}</h2>
+      <p>Fecha: {{ viaje.fecha }}</p>
+      <p>Espacios Disponibles: {{ viaje.espacioDisponible }}</p>
+      <p>Precio: ${{ viaje.precio }}</p>
+      <p>Destino: {{ viaje.destino.nombre }}</p>
+      <p>Estado: {{viaje.estadoviaje}}</p>
+    </ion-label>
+    <ion-button slot="end"  (click)="BorrarViaje(viaje)"  color="danger">
+      borrar
+    </ion-button>
+    <ion-button (click)="estadoviaje(viaje)" expand="block" fill="clear" shape="round">
+      Estado
+    </ion-button>
+  </ion-item>
+
+
+  
+  
+</ion-content>

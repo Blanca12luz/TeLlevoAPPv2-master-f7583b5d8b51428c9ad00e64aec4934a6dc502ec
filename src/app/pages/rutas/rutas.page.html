@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver" mode="ios" defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Rutas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let ruta of rutas">
+      <ion-label>
+        <h2>Destino: {{ ruta.destino.lat }}, {{ ruta.destino.lng }}</h2>
+        <p>Descripción: {{ ruta.descripcion }}</p>
+      </ion-label>
+      <ion-button (click)="cancelarViaje(ruta)" color="danger">Cancelar</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>
